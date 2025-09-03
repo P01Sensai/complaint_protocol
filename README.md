@@ -24,6 +24,8 @@ complaint_portal/
 | `/viewComplaint` | GET | View specific complaint | User/Admin Secret |
 | `/resolveComplaint` | POST | Resolve a complaint | Admin Secret |
 
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -35,6 +37,7 @@ complaint_portal/
    ```bash
    go run main.go models.go storage.go handlers.go
 3. Server starts on http://localhost:8080
+---
 ## 🔐 Authentication
 ### User Authentication
 - Users receive a secret_code after registration
@@ -43,7 +46,7 @@ complaint_portal/
 ### Admin Authentication
 - Use the admin secret: admin123
 - Include in the X-Admin-Secret header for admin endpoints
-
+---
 ## Data Models
 
 ### User Structure
@@ -68,6 +71,7 @@ complaint_portal/
      "user_id": "string",
      "date": "timestamp"
     }
+---
 ## 🔄 API Flow
 ### User Registration Flow
 - POST to /register with name and email
@@ -78,15 +82,23 @@ complaint_portal/
 - POST to /submitComplaint with complaint details + X-Secret-Code header
 - Receive complaint details including unique complaint_id
 - Use complaint_id to view or reference specific complaints
-
+  
 ### Admin Management Flow
 - Use X-Admin-Secret: admin123 header
 - GET /getAllComplaintsForAdmin to view all complaints
 - POST /resolveComplaint to mark complaints as resolved
-
+---
 ## 📝 Example Usage Scenarios
 
 1. User submits a complaint: Register → Login → Submit Complaint
 2. User views their complaints: Login → Get All Complaints
 3. Admin reviews complaints: Use admin secret → Get All Complaints (Admin)
 4. Admin resolves complaint: Use admin secret → Resolve Complaint
+---
+##💡 Simple Example Flow
+1. You register → Get secret code: "abc123"
+2. You submit complaint → Get complaint ID: "comp456"
+3. You check your complaints → See your complaint listed
+4. Admin logs in → Sees your complaint + others
+5. Admin resolves → Marks your complaint as "fixed"
+6. You check again → See your complaint is now "resolved"
